@@ -1,0 +1,15 @@
+This package contains programs to:
+- compute number sequences
+- set a timer
+- benchmark your system
+
+Tested Operating Systems:
+- Arch Linux (x86_64) [09/06/2020]
+
+Dependencies:
+- bash
+- sox	| If you want to use the timer.sh
+
+Contributors:
+- Benjamin Stürz <stuerzbenni@gmail.com>
+- Andreas Stürz (for creating the timer.wav) <a.stuerz@live.de>

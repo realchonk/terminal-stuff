@@ -1,0 +1,10 @@
+To build this package use 'make' or 'make -j$(nproc)'.
+To install this package use 'make install'.
+The installation path is customizable with the environement variables
+- prefix	Where this package goes
+- bindir	Where the binaries go
+- datadir	Where the timer.wav goes
+Default values:
+- prefix=/usr/local
+- bindir=$prefix/bin
+- datadir=$prefix/share/benni
