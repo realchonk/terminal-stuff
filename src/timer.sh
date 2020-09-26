@@ -14,9 +14,13 @@ else
 	exit 1
 fi
 
+if [ -z $sleep ]; then
+	if [ -f $(dirname $0)/countdown ]; then
+		sleep=$(dirname $0)/countdown
+	else
+		sleep=sleep
+	fi
+fi
 
-sleep $delay
-
-while true; do
-	exec play $file
-done
+$sleep $delay
+play $file repeat 19

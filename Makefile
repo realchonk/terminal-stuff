@@ -1,13 +1,15 @@
-
 CC?=gcc
 CXX?=g++
-CFLAGS?=-O3
+CFLAGS?=-Og -g
 CXXFLAGS=-O3
 prefix?=/usr/local
 bindir?=$(prefix)/bin
 datadir?=$(prefix)/share/benni
 
-all: bin/bench_single bin/bench_multi bin/is_prime bin/is_perfect
+objects=bin/bench_single bin/bench_multi bin/is_prime bin/is_perfect \
+				bin/countdown
+
+all: $(objects)
 	cp src/*.sh bin/
 	chmod +x bin/*.sh
 	ln -sf is_perfect bin/count_divisors
@@ -26,6 +28,9 @@ bin/is_prime: src/is_prime.c bin
 
 bin/is_perfect: src/is_perfect.cpp bin
 	$(CXX) -o $@ $< $(CXXFLAGS) -DUNIX -std=c++17
+
+bin/countdown: src/countdown.c bin
+	$(CC) -o $@ $< $(CFLAGS)
 
 install: all
 	mkdir -p $(bindir) $(datadir)

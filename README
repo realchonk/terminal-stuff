@@ -8,7 +8,7 @@ Tested Operating Systems:
 
 Dependencies:
 - bash
-- sox   | If you want to use the timer.sh
+- sox	or a compatible 'play' command | If you want to use the timer.sh
 
 Contributors:
 - Benjamin Stürz <stuerzbenni@gmail.com>

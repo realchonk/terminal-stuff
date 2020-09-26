@@ -1,0 +1,98 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <time.h>
+
+#define arraylen(a) (sizeof(a) / sizeof(*(a)))
+
+struct time_scale {
+	char suffix;
+	unsigned mult;
+	const char* name;
+};
+static struct time_scale time_scales[] = {
+	{ 's', 1,							"second" 	},
+	{ 'm', 60,						"minute" 	},
+	{ 'h', 60*60,					"hour" 		},
+	{ 'd', 24*60*60,			"day" 		},
+	{ 'w', 7*24*60*60,		"week" 		},
+	{ 'M', 30*24*60*60,		"month" 	},
+	{ 'y', 365*24*60*60,	"year" 		},
+};
+
+static time_t parse_time(const char* str) {
+	size_t i = 0;
+	time_t t = 0;
+	while (str[i]) {
+		if (!isdigit(str[i])) {
+			puts("Invalid Format");
+			exit(1);
+		}
+		unsigned n = 0;
+		while (isdigit(str[i])) n = n * 10 + (str[i++] - '0');
+		if (isalpha(str[i])) {
+			const char ch = str[i++];
+			for (size_t j = 0; j < arraylen(time_scales); ++j) {
+				if (ch == time_scales[j].suffix) {
+					n *= time_scales[j].mult;
+					goto add;
+				}
+			}
+			printf("Unknown time scale: '%c'\n", ch);
+			exit(1);
+		}
+	add:
+		t += n;
+	}
+	return t;
+}
+static void print_time(time_t t, FILE* file) {
+	for (size_t i = arraylen(time_scales); i != 0; --i) {
+		const struct time_scale* ts = &time_scales[i];
+		if ((t / ts->mult) > 0) {
+			
+			t /= ts->mult;
+		}
+	}
+}
+
+int main(const int argc, const char* argv[]) {
+	if (argc < 2) {
+		printf("Usage: %s <time>\n", *argv);
+		return 1;
+	}
+	if (strcmp(argv[1], "--print-time-scales") == 0) {
+		puts("Time Scales:");
+		for (size_t i = 0; i < arraylen(time_scales); ++i) {
+			printf("%s\t - '%c'\n", time_scales[i].name, time_scales[i].suffix);
+		}
+		return 0;
+	}
+	else if (strcmp(argv[1], "--help") == 0) {
+		// TODO: Implement Help Page
+		puts("--help is currently not implemented");
+		return 0;
+	}
+	else if (strcmp(argv[1], "--print") == 0) {
+		if (argc < 3) {
+			printf("Usage: %s --print <time> [<time>]...\n", *argv);
+			return 1;
+		}
+		for (int i = 2; i < argc; ++i) {
+			const time_t t = parse_time(argv[i]);
+			printf("'%s' = '%us'\n", argv[i], t);
+		}
+	}
+	else {
+		const time_t t = parse_time(argv[1]);
+		const time_t end = time(NULL) + t;
+		char buf[51];
+		time_t cur;
+		while ((cur = time(NULL)) < end) {
+			sleep(1);
+			printf("\rTime left: %s\n", fmt_time(end - cur, buf));
+		}
+	}
+	return 0;
+}
