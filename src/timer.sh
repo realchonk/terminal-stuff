@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # !!! Please do not move line 4, because it gets replaced when 'make install' !!!
-datadir=$(dirname $0)/../share
+datadir=$(dirname $0)/../share/benni
 
 if [ $# -eq 2 ]; then
 	delay=$1

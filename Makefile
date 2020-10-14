@@ -4,7 +4,7 @@ CFLAGS?=-O3 -Wall -Wextra
 CXXFLAGS=-O3 -Wall -Wextra
 prefix?=/usr/local
 bindir?=$(prefix)/bin
-datadir?=$(prefix)/share/benni
+datadir?=$(abspath $(prefix)/share/benni)
 
 objects=bin/bench_single bin/bench_multi bin/is_prime bin/is_perfect \
 				bin/countdown bin/learnhelp bin/readtemp bin/perfutils
