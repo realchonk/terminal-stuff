@@ -3,14 +3,17 @@ This package contains programs to:
 - set a timer
 - benchmark your system (WIP)
 - system utilities
+- create simple backups
 
 Tested Operating Systems:
-- Arch Linux (x86_64) [10/14/2020]
+- Arch Linux (x86_64) [10/25/2020]
 - Arch Linux (armv7l) [10/14/2020]
 
 Dependencies:
 - bash
 - sox	or a compatible 'play' command | If you want to use the timer.sh
+- tar
+- gzip
 
 Contributors:
 - Benjamin Stürz <stuerzbenni@gmail.com>
