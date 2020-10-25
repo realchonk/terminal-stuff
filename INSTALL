@@ -5,8 +5,10 @@ The installation path is customizable with the environement variables
 - bindir    Where the binaries go
 - datadir   Where the timer.wav goes
 - backupdir Where the backups are go
+- backupfmt The format how backups are saved
 Default values:
 - prefix=/usr/local
 - bindir=${prefix}/bin
 - datadir=${prefix}/share/benni
 - backupdir=${prefix}/backup>
+- backupfmt="%Y-%m-%d-%H-%M-%S"
