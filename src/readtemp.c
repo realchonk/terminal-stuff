@@ -5,14 +5,6 @@
 #define THERMAL_FILE "/sys/class/thermal/thermal_zone0/temp"
 #endif
 
-int read_raw(void) {
-	FILE* file = fopen(THERMAL_FILE, "r");
-	if (!file) {
-		puts("failed to read file " THERMAL_FILE);
-		exit(1);
-	}
-}
-
 int main(void) {
 	FILE* file = fopen(THERMAL_FILE, "r");
 	if (!file) {

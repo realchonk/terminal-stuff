@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# !!! Please do not move or change line 4, because it gets replaced with 'make install' !!!
+# !!! Please do not move or change line 4 and 5, because it gets replaced with 'make install' !!!
 backupdir=$(dirname $0)/../backup
+backupfmt="%Y-%m-%d-%H-%M-%S"
 
 if [[ $# -eq 0 ]]; then
 	echo "Usage: $0 <directory...>"
@@ -11,7 +12,7 @@ fi
 for arg in "$@"; do
 	echo $arg
 	mkdir -p ${backupdir}/${arg}
-	tar -czf ${backupdir}/${arg}/$(date +"%Y-%m-%d").tar.gz ${arg}
+	tar -czf ${backupdir}/${arg}/$(date +${backupfmt}).tar.gz ${arg}
 	if [[ $? -ne 0 ]]; then
 		echo Failed to backup $arg
 		exit 1

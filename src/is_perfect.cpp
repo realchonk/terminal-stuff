@@ -32,7 +32,7 @@ static bool is_perfect(unsigned n) noexcept {
 }
 
 [[nodiscard]]
-static std::vector<unsigned> list_perfects(unsigned start = 1, unsigned end = -1) noexcept {
+inline std::vector<unsigned> list_perfects(unsigned start = 1, unsigned end = -1) noexcept {
 	std::vector<unsigned> perfects{};
 	for (unsigned i = start; i < end; ++i) {
 		if (is_perfect(i)) perfects.push_back(i);

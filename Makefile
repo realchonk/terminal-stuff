@@ -6,6 +6,7 @@ prefix?=/usr/local
 bindir?=$(prefix)/bin
 datadir?=$(abspath $(prefix)/share/benni)
 backupdir?=$(abspath $(prefix)/backup)
+backupfmt?="%Y-%m-%d-%H-%M-%S"
 
 objects=bin/bench_single bin/bench_multi bin/is_prime bin/is_perfect \
 				bin/countdown bin/learnhelp bin/readtemp bin/perfutils
@@ -48,6 +49,7 @@ install: all
 	cp -a bin/* $(bindir)
 	tmp=$$(echo $(datadir) | sed 's/\//\\\//g'); sed -i "4s/.*/datadir=$$tmp/g" $(bindir)/timer.sh
 	tmp=$$(echo $(backupdir) | sed 's/\//\\\//g'); sed -i "4s/.*/backupdir=$$tmp/g" $(bindir)/backup.sh
+	sed -i "5s/.*/backupfmt=\"$(backupfmt)\"/g" $(bindir)/backup.sh
 	cp share/* $(datadir)/
 
 clean:

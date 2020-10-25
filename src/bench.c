@@ -50,6 +50,11 @@ char* format_str(double x) {
   return buf;
 }
 
+static void print_vec4f(FILE* file, vec4f a) {
+  fprintf(file, "{%.3f,%.3f,%.3f,%.3f}",
+  	(double)a.x, (double)a.y, (double)a.z, (double)a.w
+  );
+}
 #ifdef MULTICORE
 inline unsigned nproc(void) {
   unsigned eax=11, ebx=0, ecx=1, edx=0;
@@ -63,7 +68,7 @@ inline unsigned nproc(void) {
 
 struct test {
   volatile uintmax_t counter;
-  volatile int status;
+  volatile unsigned status;
   FILE* file;
   const int* nsec;
   pthread_t thread;
@@ -79,7 +84,12 @@ void* bench(void* data) {
     const vec4f a = vec4f_rand();
     const vec4f b = vec4f_rand();
     const vec4f r = vec4f_add(a, b);
-    fprintf(t->file, "%.3f + %.3f = %.3f\n", a, b, r);
+    print_vec4f(t->file, a);
+    fputs(" + ", t->file);
+    print_vec4f(t->file, b);
+    fputs(" = ", t->file);
+    print_vec4f(t->file, r);
+    fputc('\n', t->file);
     ++t->counter;
   }
   t->status = 2;
@@ -119,7 +129,7 @@ int main(const int argc, const char* argv[]) {
   }
 
   while (1) {
-    int x = 0;
+    size_t x = 0;
     cur_clock = clock();
     for (size_t i = 0; i < num_threads; ++i) {
       x += tests[i].status;
@@ -136,7 +146,12 @@ int main(const int argc, const char* argv[]) {
     const vec4f a = vec4f_rand();
     const vec4f b = vec4f_rand();
     const vec4f r = vec4f_add(a, b);
-    fprintf(file, "%.3f + %.3f = %.3f\n", a, b, r);
+    print_vec4f(file, a);
+    fputs(" + ", file);
+    print_vec4f(file, b);
+    fputs(" = ", file);
+    print_vec4f(file, r);
+    fputc('\n', file);
     ++counter;
   }
 #endif

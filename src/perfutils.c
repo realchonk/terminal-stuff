@@ -15,8 +15,6 @@
 // read CPU frequency
 // read/write CPU governor
 
-static char governor[32];
-
 static char* read_file(const char* filename, char* buf, size_t num) {
 	FILE* file = fopen(filename, "r");
 	if (!file) {

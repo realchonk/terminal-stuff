@@ -53,7 +53,7 @@ static void print_time(time_t t) {
 	for (size_t i = arraylen(time_scales); i != 0; --i) {
 		const time_scale_t* ts = &time_scales[i-1];
 		if ((t / ts->mult) > 0) {
-			printf("%u%c", t / ts->mult, ts->suffix);
+			printf("%u%c", (unsigned)(t / ts->mult), ts->suffix);
 			t %= ts->mult;
 		}
 	}
