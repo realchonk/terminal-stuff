@@ -43,7 +43,7 @@ bin/perfutils: src/perfutils.c
 	$(CC) -o $@ $< $(CFLAGS)
 
 install: all
-	mkdir -p $(bindir) $(datadir)
+	mkdir -p $(bindir) $(datadir) $(backupdir)
 	#tmp=$$(echo $(datadir) | sed 's/\//\\\//g'); sed -i "s/datadir=/datadir=$$tmp/g" bin/timer.sh
 	cp -a bin/* $(bindir)
 	tmp=$$(echo $(datadir) | sed 's/\//\\\//g'); sed -i "4s/.*/datadir=$$tmp/g" $(bindir)/timer.sh
