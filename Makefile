@@ -5,6 +5,7 @@ CXXFLAGS=-O3 -Wall -Wextra
 prefix?=/usr/local
 bindir?=$(prefix)/bin
 datadir?=$(abspath $(prefix)/share/benni)
+backupdir?=$(abspath $(prefix)/backup)
 
 objects=bin/bench_single bin/bench_multi bin/is_prime bin/is_perfect \
 				bin/countdown bin/learnhelp bin/readtemp bin/perfutils
@@ -46,6 +47,7 @@ install: all
 	#tmp=$$(echo $(datadir) | sed 's/\//\\\//g'); sed -i "s/datadir=/datadir=$$tmp/g" bin/timer.sh
 	cp -a bin/* $(bindir)
 	tmp=$$(echo $(datadir) | sed 's/\//\\\//g'); sed -i "4s/.*/datadir=$$tmp/g" $(bindir)/timer.sh
+	tmp=$$(echo $(backupdir) | sed 's/\//\\\//g'); sed -i "4s/.*/backupdir=$$tmp/g" $(bindir)/backup.sh
 	cp share/* $(datadir)/
 
 clean:
