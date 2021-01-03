@@ -2,6 +2,7 @@
 
 # !!! Please do not move line 4, because it gets replaced when 'make install' !!!
 datadir=$(dirname $0)/../share/benni
+repeats=20
 
 if [ $# -eq 2 ]; then
 	delay=$1
@@ -23,4 +24,7 @@ if [ -z $sleep ]; then
 fi
 
 $sleep $delay
-play $file repeat 19
+for (( i=0; i < ${repeats}; i++ )); do
+	aplay $file > /dev/null 2> /dev/null
+	if [ $? -ne 0 ]; then break; fi
+done

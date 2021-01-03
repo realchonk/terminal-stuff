@@ -1,14 +1,18 @@
-To build this package use 'make' or 'make -j$(nproc)'.
+To build this package use 'make' for default options or 'make ARG=VALUE'.
 To install this package use 'make install'.
-The installation path is customizable with the environement variables
-- prefix    Where this package goes
-- bindir    Where the binaries go
-- datadir   Where the timer.wav goes
-- backupdir Where the backups are go
-- backupfmt The format how backups are saved
+
+The installation details are customizable with make variables (ARG)
+- prefix             Location of the package
+- bindir             Location of the binaries
+- datadir            Location of timer.wav
+- backupdir          Location for backups
+- backupfmt          Directory name format for the backups
+- timer_repeats      Number of times timer.sh repeats playing timer.wav
+
 Default values:
 - prefix=/usr/local
 - bindir=${prefix}/bin
 - datadir=${prefix}/share/benni
 - backupdir=${prefix}/backup>
 - backupfmt="%Y-%m-%d-%H-%M-%S"
+- timer_repeats=20
