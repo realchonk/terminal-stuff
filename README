@@ -11,7 +11,7 @@ Tested Operating Systems:
 
 Dependency			| Application
 - bash				| *.sh
-- alsa-utils		| timer.sh
+- alsa-utils		  | timer.sh
 - tar				| backup.sh
 - gzip				| backup.sh
 
