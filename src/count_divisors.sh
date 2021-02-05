@@ -1,21 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ $# -ne 1 ]; then
-	echo "Usage: $0 <integer>"
-	exit -1
-fi
+[ $# -ne 1 ] && echo "Usage: $0 <integer>" && exit 255
 
-if [ $1 -eq 0 ]; then
-	echo 0
-	exit 0
-fi
+[ "$1" -eq 0 ] && echo 0 && exit 0
 
 n_divs=1
 
-for (( i=1; i<=($1/2); i++ )); do
-	if [ $(( $1 % $i )) -eq 0 ]; then
-		n_divs=$(($n_divs + 1))
-	fi
+i=1
+while [ $i -le "$(($1/2))" ]; do
+	[ $(($1 % i)) -eq 0 ] && n_divs=$((n_divs + 1))
+	i=$((i + 1))
 done
 
-echo $n_divs
+echo "$n_divs"

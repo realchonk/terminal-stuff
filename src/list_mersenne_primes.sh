@@ -11,16 +11,16 @@ elif [ $# -eq 2 ]; then
 	end=$2
 else
 	echo "Usage: $0 [<start>] <end>"
-	exit -1
+	exit 1
 fi
 
-is_prime=$(dirname $0)/is_prime.sh
-n=$(( 2**$start ))
+[ -z "$is_prime" ] && is_prime="$(dirname "$0")/is_prime.sh"
+n=$(( 1 << start ))
 
-for (( i=start; i<end; i++ )); do
-	tmp=$(( $n - 1 ))
-	if [ $($is_prime $tmp) -eq 0 ]; then
-		echo "2^$i-1 = $tmp"
-	fi
-	n=$(( $n*2 ))
+i="$start"
+while [ "$i" -lt "$end" ]; do
+	tmp=$(( n - 1 ))
+	[ "$($is_prime "$tmp")" -eq 0 ] && echo "2^$i-1 = $tmp"
+	n=$(( n*2 ))
+	i=$((i + 1))
 done

@@ -1,21 +1,17 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ $# -ne 1 ]; then
-	echo "Usage: $0 <integer>"
-fi
+[ $# -ne 1 ] && echo "Usage: $0 <integer>" && exit 255
 
-if [ -z "$count_divisors" ]; then
-	count_divisors=$(dirname $0)/count_divisors.sh
-fi
+[ -z "$count_divisors" ] || count_divisors="$(dirname "$0")/count_divisors.sh"
 
-n_divs=$($count_divisors $1)
+n_divs="$(count_divisors "$1")"
 
-for (( i=1; i<$1; i++ )); do
-	n=$($count_divisors $i)
-	if [ $n -ge $n_divs ]; then
-		echo 1
-		exit 1
-	fi
+i=1
+while [ "$i" -lt "$1" ]; do
+	n="$(count_divisors "$i")"
+	[ "$n" -ge "$n_divs" ] && echo 1 && exit 1
+	i=$((i + 1))
 done
 
 echo 0
+exit 0
