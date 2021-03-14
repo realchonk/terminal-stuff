@@ -4,10 +4,7 @@
 backupdir="$(dirname "$0")/../backup"
 backupfmt="%Y-%m-%d-%H-%M-%S"
 
-if [ $# -eq 0 ]; then
-	echo "Usage: $0 <directory...>"
-	exit 1
-fi
+[ $# -eq 0 ] && echo "Usage: $0 <directory...>" && exit 1
 
 for arg in "$@"; do
 	echo "$arg"
@@ -18,4 +15,3 @@ for arg in "$@"; do
 	fi
 done
 
-exit 0

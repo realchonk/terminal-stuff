@@ -9,9 +9,7 @@ backupdir?=$(abspath $(prefix)/backup)
 backupfmt?="%Y-%m-%d-%H-%M-%S"
 timer_repeats=20
 
-objects=bin/bench_single bin/bench_multi bin/is_prime bin/is_perfect \
-				bin/countdown bin/learnhelp bin/readtemp bin/perfutils \
-				bin/solve_quadratic bin/levenshtein
+objects=bin/solve_quadratic bin/is_prime bin/is_perfect bin/countdown bin/readtemp bin/perfutils
 
 all: bin $(objects)
 	cp src/*.sh bin/
