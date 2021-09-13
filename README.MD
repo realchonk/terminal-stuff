@@ -5,12 +5,6 @@ This package contains programs to:
 - system utilities
 - create simple backups
 
-Tested Operating Systems:
-OS | Architecture | Date
----|--------------|-----
-Arch Linux | x86_64 | 2021-01-03
-Arch Linux | armv7l | 2020-10-14
-Gentoo Linux | x86_64 | 2021-05-24
 
 Dependency | Application
 -----------|------------
