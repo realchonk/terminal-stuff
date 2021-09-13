@@ -9,7 +9,8 @@ backupdir?=$(abspath $(prefix)/backup)
 backupfmt?="%Y-%m-%d-%H-%M-%S"
 timer_repeats=20
 
-objects=bin/solve_quadratic bin/is_prime bin/is_perfect bin/countdown bin/readtemp bin/perfutils
+objects=bin/solve_quadratic bin/is_prime bin/is_perfect bin/countdown bin/readtemp bin/perfutils \
+		  bin/slowprint
 
 all: bin $(objects)
 	cp src/*.sh bin/
@@ -45,6 +46,9 @@ bin/perfutils: src/perfutils.c
 
 bin/solve_quadratic: src/solve_quadratic.cpp
 	$(CXX) -o $@ $< $(CXXFLAGS)
+
+bin/slowprint: src/slowprint.c
+	$(CC) -o $@ $< $(CFLAGS)
 
 install: all
 	mkdir -p $(bindir) $(datadir) $(backupdir)
