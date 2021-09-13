@@ -6,6 +6,7 @@ This package contains programs to:
 - create simple backups
 
 Tested Operating Systems:
+
 OS | Architecture | Date
 ---|--------------|-----
 Arch Linux | x86_64 | 2021-01-03
@@ -14,9 +15,7 @@ Gentoo Linux | x86_64 | 2021-05-24
 
 Dependency | Application
 -----------|------------
-coreutils | *.sh
 alsa-utils | timer.sh
-ffmpeg | mkslideshow.sh
 
 Contributors:
 - Benjamin Stürz <benni@stuerz.xyz>
