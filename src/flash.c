@@ -216,7 +216,7 @@ end:
 
    close(fd_src);
    close(fd_dest);
-   if (ec != 0)
+   if (ec == 0)
       putchar('\n');
    return ec;
 }
