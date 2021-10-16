@@ -10,7 +10,7 @@ backupfmt?="%Y-%m-%d-%H-%M-%S"
 timer_repeats=20
 
 objects=bin/solve_quadratic bin/is_prime bin/is_perfect bin/countdown bin/readtemp bin/perfutils \
-		  bin/slowprint
+		  bin/slowprint bin/flash
 
 all: bin $(objects)
 	cp src/*.sh bin/
@@ -48,6 +48,9 @@ bin/solve_quadratic: src/solve_quadratic.cpp
 	$(CXX) -o $@ $< $(CXXFLAGS)
 
 bin/slowprint: src/slowprint.c
+	$(CC) -o $@ $< $(CFLAGS)
+
+bin/flash: src/flash.c
 	$(CC) -o $@ $< $(CFLAGS)
 
 install: all
