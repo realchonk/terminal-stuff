@@ -3,6 +3,7 @@
 EXE="$(basename "$0")"
 USAGE="$EXE [-c CPP] [-o CPPFLAG] SYSCALL"
 cpp=cpp
+printf_opt="%d"
 
 printed=0
 
@@ -16,6 +17,7 @@ while [ "$#" -gt 0 ]; do
       echo "  -h,--help       Show this screen."
       echo "  -c CPP          Use CPP as the C preprocessor."
       echo "  -o CPPFLAGS     Add an options for the C preprocessor."
+      echo "  -x              Print hexadecimal representation."
       echo ""
       echo "Bugs to <benni@stuerz.xyz>"
       exit 0
@@ -31,14 +33,21 @@ while [ "$#" -gt 0 ]; do
       SPACE=' '
       shift 2
       ;;
+   -x)
+      printf_opt="%x"
+      shift
+      ;;
    -*)
       echo "$EXE: Invalid option '$1'." >&2
       exit 1
       ;;
    *)
       out="$(printf '#include <asm/unistd.h>\n__NR_%s\n' "$1" | "$cpp" $CPPFLAGS | grep -v '^\(#.*\|\s*\)$')"
-      echo "$out" | grep -Fq __NR_ && out="invalid"
-      echo "$1: $out"
+      if echo "$out" | grep -Fq __NR_; then
+         echo "$1: invalid"
+      else
+         printf "$1: $printf_opt\n" "$out"
+      fi
       printed="$((printed + 1))"
       shift
       ;;
