@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
          return print_usage(), 1;
    } else return print_usage(), 1;
 
-   const useconds_t delay = 1000000 / (baudrate / 8);
+   const useconds_t delay = (useconds_t)(1000000.0f / (baudrate / 8.0f));
 
    int ch;
    while ((ch = fgetc(stdin)) != EOF) {
