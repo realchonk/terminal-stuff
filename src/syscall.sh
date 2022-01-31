@@ -1,7 +1,7 @@
 #!/bin/sh
 
 EXE="$(basename "$0")"
-USAGE="$EXE [-c CPP] [-o CPPFLAG] SYSCALL"
+USAGE="$EXE [-x] [-c CPP] [-o CPPFLAG] SYSCALL"
 cpp=cpp
 printf_opt="%d"
 
@@ -19,7 +19,7 @@ while [ "$#" -gt 0 ]; do
       echo "  -o CPPFLAGS     Add an options for the C preprocessor."
       echo "  -x              Print hexadecimal representation."
       echo ""
-      echo "Bugs to <benni@stuerz.xyz>"
+      echo "Bugs to Benjamin Stürz <benni@stuerz.xyz>"
       exit 0
       ;;
    -c)
