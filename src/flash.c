@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
       return 1;
    }
 
-   const int fd_src = open(src, O_RDONLY | O_DIRECT);
+   const int fd_src = open(src, O_RDONLY);
    if (fd_src < 0) {
       eprintf("failed to open '%s'", src);
       return 1;
